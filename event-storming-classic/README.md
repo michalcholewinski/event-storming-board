@@ -18,27 +18,37 @@ _Note: Considered endpoints: `/boards/{id}/items` + DTO with details  or separat
 ___
 * As a User of Application I want to be able to stick new card with question/doubts to event to inform business stakeholders that more explanation is needed.
 
+_Note: Same as above_
 ___
 * As a User of Application I want to be able to stick card on board with additional explanation in order to precise requirement
 
+_Note: Same as above_
 ___
 * As a User of Application I want to be able to stick card on board with command in order to precise what happens in system to trigger given event.
 
+_Note: Same as above_
 ___
 * As a User of Application I want to ba able to assign an Actor to command in order to provide information which user executes command.
 
+_Note: As long as actors are assigned to command we could use `POST /boards/{b_id}/commands/{comm_id}/actors` endpoint. (endpoint depends on way how we are going to desing rest resource for board items [cards])_
 ___
 * As a User of Application I want to be able to add an aggregate in order to group previously created domain events
 
+_Note: As long as actors are assigned to command we could use `POST /boards/{b_id}/aggregates` endpoint._
 ___
 * As a User of Application I want to be informed about each creation and modification datetime
 
+_Note: Only thing to implementing here is Jpa Auditing_
 ___
 * As a User of Application I want that all sticky notes remember their places on board in order to see same view of board after rerun of application
 
+_Note: Each item that is visible on board should have coordinates stored in database_
 ___
 * As a User of Application I want to work with sticky notes like in real world in order to reflect on real board and real sticky notes
 
+_Note: Save changes on each move and edition of text_
 ___
 * As a User of Application I want to be able add event which causes that customer spends money and which events give income in order to generate report of profitability of designed system.
 
+_Note: It's item that can be assigned to domain event to provide details about expenditure or income_
+___
