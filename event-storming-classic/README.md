@@ -1,7 +1,8 @@
 # Event Storming Board Service
+## Description
 Repository for code of backend service for event storming board application
 
-# User Stories
+## User Stories
 As a requirements to our application I've created set of user stories:
 
 * As a User of Application I want to be able to create new team in order to collaborate with other team members
@@ -52,3 +53,8 @@ ___
 
 _Note: It's item that can be assigned to domain event to provide details about expenditure or income_
 ___
+
+## Author
+**Michał Cholewiński**, Software Engineer  
+[cholewinskimichal.com](http://cholewinskimichal.com)    
+[Eager To IT](https://eagertoit.com)
