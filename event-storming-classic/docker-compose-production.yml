@@ -1,0 +1,24 @@
+version: '3.1'
+
+services:
+  prod_event_storming_service:
+    container_name: prod-event-storming-service
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 9051:9885
+    depends_on:
+      - "prod_event_storming_db"
+  prod_event_storming_db:
+    container_name: prod_event-storming-db
+    image: postgres
+    restart: always
+    ports:
+      - 5481:5432
+    environment:
+      POSTGRES_PASSWORD: fag4g$fsfsg7
+      POSTGRES_DB: eventstorming
+    volumes:
+      - /var/lib/eventstorming-production/postgres:/var/lib/postgresql/data

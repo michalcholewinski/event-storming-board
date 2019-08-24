@@ -1,0 +1,24 @@
+version: '3.1'
+
+services:
+  test_event_storming_service:
+    container_name: test-event-storming-service
+    build:
+      context: .
+      dockerfile: Dockerfile-test
+    restart: always
+    ports:
+      - 9052:9885
+    depends_on:
+      - "test_event_storming_db"
+  test_event_storming_db:
+    container_name: test_event-storming-db
+    image: postgres
+    restart: always
+    ports:
+      - 5482:5432
+    environment:
+      POSTGRES_PASSWORD: postgres-test
+      POSTGRES_DB: eventstorming
+    volumes:
+      - /var/lib/eventstorming-test/postgres:/var/lib/postgresql/data

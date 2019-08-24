@@ -1,4 +1,4 @@
-package com.eventstorming.eventstormingclassic;
+package com.eventstorming;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
