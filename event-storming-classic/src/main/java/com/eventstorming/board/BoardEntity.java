@@ -37,4 +37,52 @@ public class BoardEntity {
 
     @OneToMany(mappedBy = "board")
     private Set<StickyNoteEntity> stickyNotes;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public TeamEntity getTeam() {
+        return team;
+    }
+
+    public void setTeam(TeamEntity team) {
+        this.team = team;
+    }
+
+    public Set<AggregateEntity> getAggregates() {
+        return aggregates;
+    }
+
+    public void setAggregates(Set<AggregateEntity> aggregates) {
+        this.aggregates = aggregates;
+    }
+
+    public Set<StickyNoteEntity> getStickyNotes() {
+        return stickyNotes;
+    }
+
+    public void setStickyNotes(Set<StickyNoteEntity> stickyNotes) {
+        this.stickyNotes = stickyNotes;
+    }
 }

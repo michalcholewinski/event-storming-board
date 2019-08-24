@@ -45,7 +45,7 @@ CREATE TABLE STICKY_NOTE
     POS_X        NUMERIC(9, 6)                NOT NULL,
     POS_Y        NUMERIC(9, 6)                NOT NULL,
     COLOR        VARCHAR(6)                   NOT NULL,
-    TYPE         VARCHAR(10)                  NOT NULL,
+    TYPE         VARCHAR(20)                  NOT NULL,
     BOARD_ID     BIGINT REFERENCES BOARD (ID) NOT NULL,
     AGGREGATE_ID BIGINT REFERENCES AGGREGATE (ID)
 );

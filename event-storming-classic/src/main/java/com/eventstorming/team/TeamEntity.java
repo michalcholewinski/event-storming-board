@@ -29,4 +29,36 @@ public class TeamEntity {
 
     @OneToMany(mappedBy = "team")
     private Set<BoardEntity> boards;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Set<BoardEntity> getBoards() {
+        return boards;
+    }
+
+    public void setBoards(Set<BoardEntity> boards) {
+        this.boards = boards;
+    }
 }
