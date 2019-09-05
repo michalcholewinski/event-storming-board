@@ -4,6 +4,7 @@ import com.eventstorming.domain.board.BoardDto;
 import com.eventstorming.domain.board.BoardService;
 import com.eventstorming.domain.team.dto.TeamDto;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 
 import java.util.List;
 import java.util.Set;
@@ -19,8 +20,8 @@ class TeamService {
         this.boardService = boardService;
     }
 
-    public Set<TeamDto> getTeams() {
-        return mapTeams(teamRepository.findAll());
+    public Flux<TeamDto> getTeams() {
+        return Flux.fromIterable(mapTeams(teamRepository.findAll()));
     }
 
     public TeamDto createTeam(TeamDto in) {
