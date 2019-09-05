@@ -1,0 +1,12 @@
+version: '3.1'
+
+services:
+  event_storming_db:
+    container_name: event-storming-db
+    image: postgres
+    restart: always
+    ports:
+          - 5480:5432
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: eventstorming

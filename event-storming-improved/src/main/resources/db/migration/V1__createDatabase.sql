@@ -1,0 +1,51 @@
+CREATE SEQUENCE TEAM_SEQ
+    START 1
+    INCREMENT BY 1;
+
+CREATE TABLE TEAM
+(
+    ID          BIGINT PRIMARY KEY NOT NULL,
+    UUID        UUID               NOT NULL,
+    NAME        VARCHAR(50)        NOT NULL,
+    DESCRIPTION VARCHAR(255)       NOT NULL
+);
+
+CREATE SEQUENCE BOARD_SEQ
+    START 1
+    INCREMENT BY 1;
+CREATE TABLE BOARD
+(
+    ID          BIGINT PRIMARY KEY          NOT NULL,
+    UUID        UUID                        NOT NULL,
+    NAME        VARCHAR(100)                NOT NULL,
+    DESCRIPTION VARCHAR(255),
+    TEAM_ID     BIGINT REFERENCES TEAM (ID) NOT NULL
+);
+
+CREATE SEQUENCE AGGREGATE_SEQ
+    START 1
+    INCREMENT BY 1;
+CREATE TABLE AGGREGATE
+(
+    ID          BIGINT PRIMARY KEY           NOT NULL,
+    UUID        UUID                         NOT NULL,
+    NAME        VARCHAR(50)                  NOT NULL,
+    DESCRIPTION VARCHAR(255)                 NOT NULL,
+    BOARD_ID    BIGINT REFERENCES BOARD (ID) NOT NULL
+);
+
+CREATE SEQUENCE STICKY_NOTE_SEQ
+    START 1
+    INCREMENT BY 1;
+CREATE TABLE STICKY_NOTE
+(
+    ID           BIGINT PRIMARY KEY           NOT NULL,
+    UUID         UUID                         NOT NULL,
+    TEXT         VARCHAR(255)                 NOT NULL,
+    POS_X        NUMERIC(9, 6)                NOT NULL,
+    POS_Y        NUMERIC(9, 6)                NOT NULL,
+    COLOR        VARCHAR(6)                   NOT NULL,
+    TYPE         VARCHAR(20)                  NOT NULL,
+    BOARD_ID     BIGINT REFERENCES BOARD (ID) NOT NULL,
+    AGGREGATE_ID BIGINT REFERENCES AGGREGATE (ID)
+);
