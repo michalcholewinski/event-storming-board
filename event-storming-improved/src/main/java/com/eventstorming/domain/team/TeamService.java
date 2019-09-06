@@ -4,7 +4,6 @@ import com.eventstorming.domain.board.BoardDto;
 import com.eventstorming.domain.board.BoardService;
 import com.eventstorming.domain.team.dto.TeamDto;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Flux;
 
 import java.util.List;
 import java.util.Set;
@@ -12,7 +11,7 @@ import java.util.Set;
 import static java.util.stream.Collectors.toSet;
 
 @Service
-public class TeamService {
+class TeamService {
     private final TeamRepository teamRepository;
     private final BoardService boardService;
 
@@ -21,8 +20,8 @@ public class TeamService {
         this.boardService = boardService;
     }
 
-    public Flux<TeamDto> getTeams() {
-        return Flux.fromIterable(mapTeams(teamRepository.findAll()));
+    public Set<TeamDto> getTeams() {
+        return mapTeams(teamRepository.findAll());
     }
 
     public TeamDto createTeam(TeamDto in) {
@@ -50,8 +49,8 @@ public class TeamService {
         return boardService.createBoard(boardDto, teamEntity);
     }
 
-    public Flux<BoardDto> getBoards(Long teamId) {
+    public List<BoardDto> getBoards(Long teamId) {
         teamRepository.findById(teamId).orElseThrow(TeamNotFoundException::new);
-        return Flux.fromIterable(boardService.getBoards(teamId));
+        return boardService.getBoards(teamId);
     }
 }
