@@ -1,6 +1,10 @@
-package com.eventstorming.stickynote;
+package com.eventstorming.domain.stickynote;
 
 import com.eventstorming.domain.board.BoardEntity;
+import com.eventstorming.stickynote.StickyNoteDto;
+import com.eventstorming.stickynote.StickyNoteEntity;
+import com.eventstorming.stickynote.StickyNoteRepository;
+import com.eventstorming.stickynote.StickyNoteType;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

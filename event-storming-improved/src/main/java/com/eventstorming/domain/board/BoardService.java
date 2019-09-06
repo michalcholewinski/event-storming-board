@@ -2,10 +2,11 @@ package com.eventstorming.domain.board;
 
 import com.eventstorming.aggregate.AggregateDto;
 import com.eventstorming.aggregate.AggregateService;
+import com.eventstorming.domain.stickynote.StickyNoteService;
 import com.eventstorming.domain.team.TeamEntity;
 import com.eventstorming.stickynote.StickyNoteDto;
-import com.eventstorming.stickynote.StickyNoteService;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -47,8 +48,8 @@ public class BoardService {
         return boardDto;
     }
 
-    public DetailedBoardDto getBoard(Long boardId) {
-        return toDetailedBoard(boardRepository.findById(boardId).orElseThrow(BoardNotFoundException::new));
+    public Mono<DetailedBoardDto> getBoard(Long boardId) {
+        return Mono.fromCallable(() -> toDetailedBoard(boardRepository.findById(boardId).orElseThrow(BoardNotFoundException::new)));
     }
 
     private DetailedBoardDto toDetailedBoard(BoardEntity entity) {

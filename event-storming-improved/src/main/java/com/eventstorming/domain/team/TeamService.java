@@ -10,8 +10,9 @@ import java.util.List;
 import java.util.Set;
 
 import static java.util.stream.Collectors.toSet;
+
 @Service
-class TeamService {
+public class TeamService {
     private final TeamRepository teamRepository;
     private final BoardService boardService;
 
@@ -49,8 +50,8 @@ class TeamService {
         return boardService.createBoard(boardDto, teamEntity);
     }
 
-    public List<BoardDto> getBoards(Long teamId) {
+    public Flux<BoardDto> getBoards(Long teamId) {
         teamRepository.findById(teamId).orElseThrow(TeamNotFoundException::new);
-        return boardService.getBoards(teamId);
+        return Flux.fromIterable(boardService.getBoards(teamId));
     }
 }
