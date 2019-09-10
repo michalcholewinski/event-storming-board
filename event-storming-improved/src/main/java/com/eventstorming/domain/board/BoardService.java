@@ -1,74 +1,86 @@
 package com.eventstorming.domain.board;
 
-import com.eventstorming.aggregate.AggregateDto;
-import com.eventstorming.aggregate.AggregateService;
+import co.cantina.spring.jooq.sample.model.tables.records.BoardRecord;
+import com.eventstorming.domain.aggregate.AggregateDto;
+import com.eventstorming.domain.aggregate.AggregateService;
 import com.eventstorming.domain.stickynote.StickyNoteService;
-import com.eventstorming.domain.team.TeamEntity;
-import com.eventstorming.stickynote.StickyNoteDto;
+import com.eventstorming.domain.stickynote.StickyNoteDto;
+import org.jooq.DSLContext;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
+import static co.cantina.spring.jooq.sample.model.Sequences.BOARD_SEQ;
+import static co.cantina.spring.jooq.sample.model.Tables.BOARD;
 import static java.util.stream.Collectors.toList;
 
 @Service
 public class BoardService {
-    private final BoardRepository boardRepository;
     private final AggregateService aggregateService;
     private final StickyNoteService stickyNoteService;
+    private final DSLContext dsl;
 
-    public BoardService(BoardRepository boardRepository, AggregateService aggregateService, StickyNoteService stickyNoteService) {
-        this.boardRepository = boardRepository;
+    public BoardService(AggregateService aggregateService, StickyNoteService stickyNoteService, DSLContext dsl) {
+//        this.boardRepository = boardRepository;
         this.aggregateService = aggregateService;
         this.stickyNoteService = stickyNoteService;
+        this.dsl = dsl;
     }
 
-    public BoardDto createBoard(BoardDto boardDto, TeamEntity teamEntity) {
-        BoardEntity boardEntity = new BoardEntity();
-        boardEntity.setName(boardDto.getName());
-        boardEntity.setDescription(boardDto.getDescription());
-        boardEntity.setTeam(teamEntity);
-        return mapBoard(boardRepository.save(boardEntity));
+    public BoardDto createBoard(BoardDto boardDto, Long teamId) {
+        BoardRecord boardRecord = dsl.insertInto(BOARD, BOARD.ID, BOARD.NAME, BOARD.DESCRIPTION, BOARD.TEAM_ID, BOARD.UUID)
+                .values(dsl.nextval(BOARD_SEQ), boardDto.getName(), boardDto.getDescription(), teamId, UUID.randomUUID())
+                .returning()
+                .fetchOne();
+        return mapBoard(boardRecord);
     }
 
     public List<BoardDto> getBoards(Long teamId) {
-        return mapBoards(boardRepository.findAllByTeam_Id(teamId));
+        return dsl.selectFrom(BOARD)
+                .where(BOARD.TEAM_ID.eq(teamId))
+                .fetch()
+                .stream().map(this::mapBoard)
+                .collect(toList());
     }
 
-    private List<BoardDto> mapBoards(List<BoardEntity> entities) {
-        return entities.stream().map(this::mapBoard).collect(toList());
-    }
-
-    private BoardDto mapBoard(BoardEntity entity) {
+    private BoardDto mapBoard(BoardRecord record) {
         BoardDto boardDto = new BoardDto();
-        boardDto.setId(entity.getId());
-        boardDto.setName(entity.getName());
-        boardDto.setDescription(entity.getDescription());
+        boardDto.setId(record.getId());
+        boardDto.setName(record.getName());
+        boardDto.setDescription(record.getDescription());
         return boardDto;
     }
 
     public DetailedBoardDto getBoard(Long boardId) {
-        return toDetailedBoard(boardRepository.findById(boardId).orElseThrow(BoardNotFoundException::new));
+        BoardRecord boardRecord = fetchBoard(boardId);
+        return toDetailedBoard(boardRecord);
     }
 
-    private DetailedBoardDto toDetailedBoard(BoardEntity entity) {
+    private BoardRecord fetchBoard(Long boardId) {
+        return dsl.selectFrom(BOARD)
+                .where(BOARD.ID.eq(boardId))
+                .fetchOptional().orElseThrow(BoardNotFoundException::new);
+    }
+
+    private DetailedBoardDto toDetailedBoard(BoardRecord record) {
         DetailedBoardDto dto = new DetailedBoardDto();
-        Long id = entity.getId();
+        Long id = record.getId();
         dto.setId(id);
-        dto.setName(entity.getName());
-        dto.setDescription(entity.getDescription());
+        dto.setName(record.getName());
+        dto.setDescription(record.getDescription());
         dto.setAggregates(aggregateService.getAggregates(id));
         dto.setStickyNotes(stickyNoteService.getStickyNotes(id));
         return dto;
     }
 
     public AggregateDto createAggregate(Long boardId, AggregateDto aggregate) {
-        BoardEntity boardEntity = boardRepository.findById(boardId).orElseThrow(BoardNotFoundException::new);
-        return aggregateService.createAggregate(boardEntity, aggregate);
+        fetchBoard(boardId);
+        return aggregateService.createAggregate(boardId, aggregate);
     }
 
     public StickyNoteDto createStickyNote(Long boardId, StickyNoteDto stickyNote) {
-        BoardEntity boardEntity = boardRepository.findById(boardId).orElseThrow(BoardNotFoundException::new);
-        return stickyNoteService.createStickyNote(boardEntity, stickyNote);
+        fetchBoard(boardId);
+        return stickyNoteService.createStickyNote(boardId, stickyNote);
     }
 }

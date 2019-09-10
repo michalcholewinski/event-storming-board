@@ -1,6 +1,6 @@
-package com.eventstorming.stickynote;
+package com.eventstorming.domain.stickynote;
 
-import com.eventstorming.aggregate.AggregateEntity;
+import com.eventstorming.domain.aggregate.AggregateEntity;
 import com.eventstorming.domain.board.BoardEntity;
 import org.hibernate.annotations.GenericGenerator;
 

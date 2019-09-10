@@ -1,4 +1,4 @@
-package com.eventstorming.aggregate;
+package com.eventstorming.domain.aggregate;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

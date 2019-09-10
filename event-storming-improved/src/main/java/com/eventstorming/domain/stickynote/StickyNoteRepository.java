@@ -1,4 +1,4 @@
-package com.eventstorming.stickynote;
+package com.eventstorming.domain.stickynote;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

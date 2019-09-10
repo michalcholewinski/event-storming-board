@@ -1,7 +1,7 @@
-package com.eventstorming.aggregate;
+package com.eventstorming.domain.aggregate;
 
 import com.eventstorming.domain.board.BoardEntity;
-import com.eventstorming.stickynote.StickyNoteEntity;
+import com.eventstorming.domain.stickynote.StickyNoteEntity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;

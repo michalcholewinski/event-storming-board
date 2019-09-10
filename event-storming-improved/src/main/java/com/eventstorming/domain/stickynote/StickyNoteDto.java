@@ -1,4 +1,4 @@
-package com.eventstorming.stickynote;
+package com.eventstorming.domain.stickynote;
 
 public class StickyNoteDto {
     private Long id;

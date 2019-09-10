@@ -1,4 +1,4 @@
-package com.eventstorming.stickynote;
+package com.eventstorming.domain.stickynote;
 
 public enum StickyNoteType {
     COMMAND, DOMAIN_EVENT  //TODO(mcholewi) add more types
