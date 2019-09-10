@@ -1,4 +1,4 @@
-package com.eventstorming.domain.team;
+package com.eventstorming.domain.team.dto;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

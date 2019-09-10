@@ -1,12 +1,8 @@
 package com.eventstorming.domain.board;
 
 import co.cantina.spring.jooq.sample.model.tables.records.BoardRecord;
-import com.eventstorming.domain.aggregate.AggregateDto;
-import com.eventstorming.domain.aggregate.AggregateService;
-import com.eventstorming.domain.stickynote.StickyNoteService;
-import com.eventstorming.domain.stickynote.StickyNoteDto;
+import com.eventstorming.domain.board.dto.*;
 import org.jooq.DSLContext;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
@@ -15,14 +11,12 @@ import static co.cantina.spring.jooq.sample.model.Sequences.BOARD_SEQ;
 import static co.cantina.spring.jooq.sample.model.Tables.BOARD;
 import static java.util.stream.Collectors.toList;
 
-@Service
-public class BoardService {
+class BoardService {
     private final AggregateService aggregateService;
     private final StickyNoteService stickyNoteService;
     private final DSLContext dsl;
 
     public BoardService(AggregateService aggregateService, StickyNoteService stickyNoteService, DSLContext dsl) {
-//        this.boardRepository = boardRepository;
         this.aggregateService = aggregateService;
         this.stickyNoteService = stickyNoteService;
         this.dsl = dsl;

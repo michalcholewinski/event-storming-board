@@ -1,32 +1,26 @@
 package com.eventstorming.domain.team;
 
 import co.cantina.spring.jooq.sample.model.Sequences;
-import co.cantina.spring.jooq.sample.model.Tables;
 import co.cantina.spring.jooq.sample.model.tables.records.TeamRecord;
-import com.eventstorming.domain.board.BoardDto;
-import com.eventstorming.domain.board.BoardService;
+import com.eventstorming.domain.board.BoardFacade;
+import com.eventstorming.domain.board.dto.BoardDto;
 import com.eventstorming.domain.team.dto.TeamDto;
+import com.eventstorming.domain.team.dto.TeamNotFoundException;
 import org.jooq.DSLContext;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static co.cantina.spring.jooq.sample.model.Tables.BOARD;
 import static co.cantina.spring.jooq.sample.model.Tables.TEAM;
 import static java.util.UUID.randomUUID;
 
-@Service
 class TeamService {
-    private final TeamRepository teamRepository;
-    private final BoardService boardService;
+    private final BoardFacade boardFacade;
     private final DSLContext dsl;
 
-    public TeamService(TeamRepository teamRepository, BoardService boardService, DSLContext dsl) {
-        this.teamRepository = teamRepository;
-//        this.teamRepository = teamRepository;
-        this.boardService = boardService;
+    public TeamService(BoardFacade boardFacade, DSLContext dsl) {
+        this.boardFacade = boardFacade;
         this.dsl = dsl;
     }
 
@@ -57,7 +51,7 @@ class TeamService {
         if (!teamExists(teamId)) {
             throw new TeamNotFoundException();
         }
-        return boardService.createBoard(boardDto, teamId);
+        return boardFacade.createBoard(boardDto, teamId);
     }
 
     private boolean teamExists(Long teamId) {
@@ -70,6 +64,6 @@ class TeamService {
         if (!teamExists(teamId)) {
             throw new TeamNotFoundException();
         }
-        return boardService.getBoards(teamId);
+        return boardFacade.getBoards(teamId);
     }
 }

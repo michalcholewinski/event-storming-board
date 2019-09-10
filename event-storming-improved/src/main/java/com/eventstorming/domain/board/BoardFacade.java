@@ -1,13 +1,13 @@
 package com.eventstorming.domain.board;
 
-import com.eventstorming.domain.aggregate.AggregateDto;
-import com.eventstorming.domain.stickynote.StickyNoteDto;
-import org.springframework.stereotype.Service;
+import com.eventstorming.domain.board.dto.AggregateDto;
+import com.eventstorming.domain.board.dto.BoardDto;
+import com.eventstorming.domain.board.dto.DetailedBoardDto;
+import com.eventstorming.domain.board.dto.StickyNoteDto;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
 
-@Service
 public class BoardFacade {
     private final BoardService boardService;
 

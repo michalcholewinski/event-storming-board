@@ -1,8 +1,8 @@
-package com.eventstorming.domain.aggregate;
+package com.eventstorming.domain.board;
 
 import co.cantina.spring.jooq.sample.model.tables.records.AggregateRecord;
+import com.eventstorming.domain.board.dto.AggregateDto;
 import org.jooq.DSLContext;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -11,13 +11,10 @@ import static co.cantina.spring.jooq.sample.model.Tables.AGGREGATE;
 import static java.util.UUID.randomUUID;
 import static java.util.stream.Collectors.toList;
 
-@Service
-public class AggregateService {
-    private final AggregateRepository aggregateRepository;
+class AggregateService {
     private final DSLContext dsl;
 
-    public AggregateService(AggregateRepository aggregateRepository, DSLContext dsl) {
-        this.aggregateRepository = aggregateRepository;
+    public AggregateService(DSLContext dsl) {
         this.dsl = dsl;
     }
 

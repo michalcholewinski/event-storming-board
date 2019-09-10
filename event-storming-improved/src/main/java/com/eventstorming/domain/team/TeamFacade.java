@@ -1,11 +1,9 @@
 package com.eventstorming.domain.team;
 
-import com.eventstorming.domain.board.BoardDto;
+import com.eventstorming.domain.board.dto.BoardDto;
 import com.eventstorming.domain.team.dto.TeamDto;
-import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
-@Service
 public class TeamFacade {
     private final TeamService teamService;
 

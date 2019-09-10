@@ -1,4 +1,4 @@
-package com.eventstorming.domain.board;
+package com.eventstorming.domain.board.dto;
 
 public class BoardDto {
     private Long id;

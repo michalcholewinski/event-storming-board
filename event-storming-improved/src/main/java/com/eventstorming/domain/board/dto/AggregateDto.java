@@ -1,4 +1,4 @@
-package com.eventstorming.domain.aggregate;
+package com.eventstorming.domain.board.dto;
 
 public class AggregateDto {
     private Long id;

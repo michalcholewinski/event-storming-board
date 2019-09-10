@@ -1,7 +1,4 @@
-package com.eventstorming.domain.board;
-
-import com.eventstorming.domain.aggregate.AggregateDto;
-import com.eventstorming.domain.stickynote.StickyNoteDto;
+package com.eventstorming.domain.board.dto;
 
 import java.util.List;
 

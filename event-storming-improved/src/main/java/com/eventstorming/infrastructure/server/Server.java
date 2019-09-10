@@ -1,12 +1,12 @@
 package com.eventstorming.infrastructure.server;
 
-import com.eventstorming.domain.aggregate.AggregateDto;
-import com.eventstorming.domain.board.BoardDto;
+import com.eventstorming.domain.board.dto.AggregateDto;
+import com.eventstorming.domain.board.dto.BoardDto;
 import com.eventstorming.domain.board.BoardFacade;
-import com.eventstorming.domain.board.DetailedBoardDto;
+import com.eventstorming.domain.board.dto.DetailedBoardDto;
 import com.eventstorming.domain.team.TeamFacade;
 import com.eventstorming.domain.team.dto.TeamDto;
-import com.eventstorming.domain.stickynote.StickyNoteDto;
+import com.eventstorming.domain.board.dto.StickyNoteDto;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;

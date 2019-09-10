@@ -1,10 +1,9 @@
-package com.eventstorming.domain.stickynote;
+package com.eventstorming.domain.board;
 
 import co.cantina.spring.jooq.sample.model.Sequences;
 import co.cantina.spring.jooq.sample.model.tables.records.StickyNoteRecord;
-import com.eventstorming.domain.stickynote.StickyNoteDto;
+import com.eventstorming.domain.board.dto.StickyNoteDto;
 import org.jooq.DSLContext;
-import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -13,8 +12,7 @@ import java.util.UUID;
 import static co.cantina.spring.jooq.sample.model.Tables.STICKY_NOTE;
 import static java.util.stream.Collectors.toList;
 
-@Service
-public class StickyNoteService {
+class StickyNoteService {
     private final DSLContext dsl;
 
     public StickyNoteService(DSLContext dsl) {
